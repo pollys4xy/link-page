@@ -65,9 +65,16 @@
   </div>
 
   <script>
-    setTimeout(() => {
-      window.location.href = "https://getallmylinks.com/pollys4xy";
-    }, 5000);
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isBot = /bot|crawl|spider|facebook|instagram|tiktok|preview|google|mediapartners/.test(userAgent);
+
+    if (!isBot) {
+      setTimeout(() => {
+        window.location.href = "https://getallmylinks.com/pollys4xy";
+      }, 5000);
+    } else {
+      console.log("Bot detected — no redirect");
+    }
   </script>
 </body>
 </html>
