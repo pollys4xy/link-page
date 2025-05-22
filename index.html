@@ -1,48 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>View in Browser</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instagram</title>
   <style>
     body {
+      margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #fff;
-      color: #000;
+      background: #fff;
+      color: #262626;
+    }
+    .header {
+      background-color: #fafafa;
+      border-bottom: 1px solid #dbdbdb;
+      padding: 10px;
+      font-weight: bold;
       text-align: center;
-      padding: 2rem;
+    }
+    .container {
+      text-align: center;
+      padding: 30px 20px;
+    }
+    .instruction {
+      margin: 20px 0;
+      font-size: 16px;
     }
     .arrow {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      font-size: 48px;
       color: #333;
+      margin-bottom: 10px;
     }
-    .dots {
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-    .copy-block {
-      margin-top: 2rem;
-      padding: 1rem;
-      border: 1px solid #ddd;
-      background: #f9f9f9;
+    .copy-box {
+      margin-top: 30px;
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 6px;
       display: inline-block;
     }
-    button {
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-      margin-top: 0.8rem;
+    .copy-button {
+      padding: 10px 18px;
+      font-size: 14px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      background-color: #3897f0;
+      color: white;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="arrow">⤴</div>
-  <p class="dots">Нажми на ⋯ в правом верхнем углу</p>
-  <p>Выбери "Открыть в браузере"</p>
-  <div class="copy-block">
-    <div><b>Если не работает:</b></div>
-    <div><code>https://getallmylinks.com/pollys4xy</code></div>
-    <button onclick="navigator.clipboard.writeText('https://getallmylinks.com/pollys4xy')">Скопировать ссылку</button>
+  <div class="header">Instagram</div>
+  <div class="container">
+    <div class="arrow">⬆️</div>
+    <div class="instruction">Tap the three dots ⋯ above</div>
+    <div class="instruction">Select “Open in browser”</div>
+    <div class="copy-box">
+      <div>If it doesn’t work, copy the link:</div>
+      <code>https://getallmylinks.com/pollys4xy</code><br/>
+      <button class="copy-button" onclick="navigator.clipboard.writeText('https://getallmylinks.com/pollys4xy')">Copy link</button>
+    </div>
   </div>
 </body>
 </html>
