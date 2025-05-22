@@ -1,64 +1,52 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Open in Instagram</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: #222;
-      color: white;
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      position: relative;
-    }
-    .message {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .btn {
-      background-color: #3897f0;
-      padding: 12px 24px;
-      border-radius: 6px;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .corner-arrow {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 2em;
-    }
-  </style>
-</head>
-<body>
-  <div class="corner-arrow">⋯</div>
-  <div class="message">
-    <h2>Open in Instagram</h2>
-    <p>To get the best experience, click ⋯ in the top right, and select <strong>Open in browser</strong></p>
-  </div>
-  <a href="https://getallmylinks.com/pollys4xy" class="btn">Open in browser</a>
-
-  <script>
-    const badAgents = [/tiktok/i, /bot/i, /crawler/i, /facebook/i, /meta/i, /snapchat/i, /pinterest/i];
-    const blockedLanguages = ['ru', 'fa', 'ar', 'zh'];
-
-    const isBadAgent = badAgents.some(re => re.test(navigator.userAgent));
-    const isBadReferrer = document.referrer && /tiktok|facebook|instagram|snapchat|meta/i.test(document.referrer);
-    const isBadLanguage = blockedLanguages.includes(navigator.language.slice(0, 2).toLowerCase());
-
-    if (!(isBadAgent || isBadReferrer || isBadLanguage)) {
-      setTimeout(() => {
-        window.location.href = "https://getallmylinks.com/pollys4xy";
-      }, 5000);
-    }
-  </script>
-</body>
-</html>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Полли - Вход</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #f3e7e9, #e3eeff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background: white;
+    max-width: 360px;
+    width: 90%;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.12);
+    text-align: center;
+  }
+  h1 {
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1d1d1f;
+  }
+  p {
+    font-size: 15px;
+    color: #444;
+    margin-bottom: 24px;
+  }
+  button {
+    background: #5c6ac4;
+    border: none;
+    padding: 14px 24px;
+    font-size: 16px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #4a579b;
+  }
+  .footer {
+    margin-top: 16px;
+    font-siz
