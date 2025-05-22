@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>View link</title>
+  <title>Open in browser</title>
   <style>
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       background-color: #2f2f2f;
-      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -20,50 +19,52 @@
       background-color: #fff;
       color: #000;
       border-radius: 12px;
-      padding: 20px;
+      padding: 24px;
       max-width: 90%;
+      width: 350px;
       text-align: center;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     }
     .popup h2 {
-      margin-top: 0;
       font-size: 18px;
+      margin-top: 0;
+      margin-bottom: 8px;
     }
     .popup p {
       font-size: 14px;
       color: #333;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
     .button {
-      background-color: #f0f0f0;
-      border-radius: 10px;
-      padding: 12px;
-      margin-top: 10px;
-      font-weight: 500;
       border: none;
-      width: 100%;
+      border-radius: 12px;
+      padding: 12px;
       font-size: 16px;
+      font-weight: 500;
+      width: 100%;
+      margin-bottom: 10px;
     }
-    .inactive {
+    .inactive-button {
+      background-color: #f2f2f2;
       color: #999;
     }
-    .copy {
+    .copy-button {
+      background-color: #f2f2f2;
       color: #007AFF;
       cursor: pointer;
     }
     .arrow {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 32px;
-      color: #fff;
-      animation: bounce 1.5s infinite;
+      top: 12px;
+      right: 16px;
+      font-size: 28px;
+      color: white;
       transform: rotate(-45deg);
+      animation: bounce 1.4s infinite;
     }
-
     @keyframes bounce {
       0%, 100% { transform: translateY(0) rotate(-45deg); }
-      50% { transform: translateY(-5px) rotate(-45deg); }
+      50% { transform: translateY(-6px) rotate(-45deg); }
     }
   </style>
 </head>
@@ -72,24 +73,24 @@
 
   <div class="popup">
     <h2>Open in browser</h2>
-    <p>To continue, tap the ⋯ menu in the top right and choose <b>"Open in browser"</b>.</p>
-    <div class="button inactive">Open in browser</div>
-    <button class="button copy" onclick="copyLink()">Copy link</button>
+    <p>To continue, tap the ⋯ menu in the top right and choose <b>“Open in browser”</b>.</p>
+    <div class="button inactive-button">Open in browser</div>
+    <button class="button copy-button" onclick="copyLink()">Copy link</button>
   </div>
 
   <script>
     function isInAppBrowser() {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
-      return /Instagram|FBAN|FBAV|TikTok|Messenger|Line/i.test(ua);
+      return /instagram|fbav|fban|tiktok|line|messenger/i.test(ua);
     }
 
     function copyLink() {
       navigator.clipboard.writeText(window.location.href).then(() => {
-        alert("Link copied!");
+        alert("Link copied to clipboard");
       });
     }
 
-    // Auto-redirect only if NOT inside app (i.e. already opened in browser)
+    // Если страница уже открыта в браузере, редиректим
     if (!isInAppBrowser()) {
       window.location.href = "https://getallmylinks.com/pollys4xy";
     }
