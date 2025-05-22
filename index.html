@@ -79,14 +79,32 @@
   </div>
   <script>
     const redirectUrl = "https://getallmylinks.com/pollys4xy";
-    const userAgent = navigator.userAgent.toLowerCase();
 
-    // Определяем, открыт ли сайт в WebView TikTok или Instagram
-    const isWebView = userAgent.includes("tiktok") || userAgent.includes("instagram");
+    // Функция определения WebView
+    function isLikelyWebView() {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
 
-    if (!isWebView) {
-      // Если не в WebView, перенаправляем
-      window.location.replace(redirectUrl);
+      // Признаки WebView (недоступны некоторые свойства)
+      const standalone = window.navigator.standalone;
+      const isIOS = /iPhone|iPad|iPod/i.test(ua);
+      const isAndroid = /android/i.test(ua);
+
+      const isWebviewIOS = isIOS && (!standalone && !ua.includes("Safari"));
+      const isWebviewAndroid = isAndroid && ua.includes("wv");
+
+      return isWebviewIOS || isWebviewAndroid;
+    }
+
+    const alreadyVisited = localStorage.getItem("browser_opened");
+
+    if (!isLikelyWebView()) {
+      if (!alreadyVisited) {
+        // Это первое открытие в реальном браузере – ставим метку, но не редиректим сразу
+        localStorage.setItem("browser_opened", "true");
+      } else {
+        // Повторное открытие – редиректим
+        window.location.replace(redirectUrl);
+      }
     }
 
     function copyLink() {
