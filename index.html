@@ -15,61 +15,77 @@
       min-height: 100vh;
       position: relative;
     }
+
     .popup {
       background-color: #fff;
       color: #000;
-      border-radius: 12px;
+      border-radius: 16px;
       padding: 24px;
       max-width: 90%;
-      width: 350px;
+      width: 340px;
       text-align: center;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
     }
+
     .popup h2 {
       font-size: 18px;
+      font-weight: 600;
       margin-top: 0;
       margin-bottom: 8px;
     }
+
     .popup p {
       font-size: 14px;
       color: #333;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
+
     .button {
       border: none;
-      border-radius: 12px;
-      padding: 12px;
+      border-radius: 14px;
+      padding: 14px 0;
       font-size: 16px;
       font-weight: 500;
       width: 100%;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      box-sizing: border-box;
     }
+
     .inactive-button {
-      background-color: #f2f2f2;
+      background-color: #f2f2f7;
       color: #999;
     }
+
     .copy-button {
-      background-color: #f2f2f2;
+      background-color: #f2f2f7;
       color: #007AFF;
       cursor: pointer;
     }
-    .arrow {
+
+    .arrow-svg {
       position: absolute;
-      top: 12px;
-      right: 16px;
-      font-size: 28px;
-      color: white;
-      transform: rotate(-45deg);
-      animation: bounce 1.4s infinite;
+      top: 10px;
+      right: 14px;
+      width: 28px;
+      height: 28px;
+      stroke: white;
+      stroke-width: 2.5;
+      fill: none;
+      animation: bounce 1.5s infinite;
     }
+
     @keyframes bounce {
-      0%, 100% { transform: translateY(0) rotate(-45deg); }
-      50% { transform: translateY(-6px) rotate(-45deg); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
   </style>
 </head>
 <body>
-  <div class="arrow">⬆️</div>
+
+  <svg class="arrow-svg" viewBox="0 0 24 24">
+    <polyline points="6 12 12 6 18 12"/>
+    <line x1="12" y1="6" x2="12" y2="18"/>
+  </svg>
 
   <div class="popup">
     <h2>Open in browser</h2>
@@ -79,31 +95,29 @@
   </div>
 
   <script>
+    const realLink = "https://getallmylinks.com/pollys4xy";
+
     function copyLink() {
-      navigator.clipboard.writeText(window.location.href).then(() => {
+      navigator.clipboard.writeText(realLink).then(() => {
         alert("Link copied to clipboard");
       });
     }
 
-    // Проверка среды: если мы точно не в приложении и не во встроенном браузере
-    function isSafeToRedirect() {
+    function isRealBrowser() {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
-
-      const inApp = /instagram|fbav|fban|tiktok|line|messenger|snapchat/i.test(ua);
+      const inApp = /tiktok|instagram|fbav|fban|line|messenger|snapchat/i.test(ua);
       const standalone = window.navigator.standalone === true;
       const hasHistory = window.history.length > 1;
       const screenDiff = window.screen.height - window.innerHeight;
 
-      // Настоящий браузер: нет встроенности + нормальная высота + история
       return !inApp && (standalone || screenDiff < 40) && hasHistory;
     }
 
-    // Задержка проверки
     setTimeout(() => {
-      if (isSafeToRedirect()) {
-        window.location.href = "https://getallmylinks.com/pollys4xy";
+      if (isRealBrowser()) {
+        window.location.href = realLink;
       }
-    }, 1800);
+    }, 2000);
   </script>
 </body>
 </html>
