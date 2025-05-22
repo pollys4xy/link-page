@@ -62,15 +62,12 @@
       cursor: pointer;
     }
 
-    .arrow-svg {
+    .arrow-icon {
       position: absolute;
       top: 10px;
       right: 14px;
-      width: 28px;
-      height: 28px;
-      stroke: white;
-      stroke-width: 2.5;
-      fill: none;
+      font-size: 28px;
+      color: white;
       animation: bounce 1.5s infinite;
     }
 
@@ -82,11 +79,7 @@
 </head>
 <body>
 
-  <!-- Стрелка к ⋯ -->
-  <svg class="arrow-svg" viewBox="0 0 24 24">
-    <polyline points="6 12 12 6 18 12"/>
-    <line x1="12" y1="6" x2="12" y2="18"/>
-  </svg>
+  <div class="arrow-icon">⤴</div>
 
   <div class="popup">
     <h2>Open in browser</h2>
@@ -96,27 +89,23 @@
   </div>
 
   <script>
-    const realLink = "https://getallmylinks.com/pollys4xy";
+    const finalRedirect = "https://getallmylinks.com/pollys4xy";
     const ua = navigator.userAgent || navigator.vendor || window.opera;
-    const inApp = /tiktok|instagram|fbav|fban|line|messenger|snapchat/i.test(ua);
 
-    // Если открыто из TikTok или Instagram — ставим флаг
-    if (inApp) {
-      localStorage.setItem("cameFromApp", "1");
-    }
-
-    // Если открыто уже из браузера (и ранее заходили из app) — редирект
-    if (!inApp && localStorage.getItem("cameFromApp") === "1") {
-      localStorage.removeItem("cameFromApp");
-      setTimeout(() => {
-        window.location.href = realLink;
-      }, 1200);
-    }
+    // Определяем — TikTok, Instagram, Facebook и др. in-app браузеры
+    const isWebView = /tiktok|instagram|fbav|fban|line|messenger|snapchat/i.test(ua);
 
     function copyLink() {
-      navigator.clipboard.writeText(realLink).then(() => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
         alert("Link copied to clipboard");
       });
+    }
+
+    // Если мы НЕ в WebView — это обычный браузер → редиректим
+    if (!isWebView) {
+      setTimeout(() => {
+        window.location.href = finalRedirect;
+      }, 800);
     }
   </script>
 </body>
