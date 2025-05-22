@@ -79,21 +79,31 @@
   </div>
 
   <script>
-    function isInAppBrowser() {
-      const ua = navigator.userAgent || navigator.vendor || window.opera;
-      return /instagram|fbav|fban|tiktok|line|messenger/i.test(ua);
-    }
-
     function copyLink() {
       navigator.clipboard.writeText(window.location.href).then(() => {
         alert("Link copied to clipboard");
       });
     }
 
-    // Если страница уже открыта в браузере, редиректим
-    if (!isInAppBrowser()) {
-      window.location.href = "https://getallmylinks.com/pollys4xy";
+    // Проверка среды: если мы точно не в приложении и не во встроенном браузере
+    function isSafeToRedirect() {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+      const inApp = /instagram|fbav|fban|tiktok|line|messenger|snapchat/i.test(ua);
+      const standalone = window.navigator.standalone === true;
+      const hasHistory = window.history.length > 1;
+      const screenDiff = window.screen.height - window.innerHeight;
+
+      // Настоящий браузер: нет встроенности + нормальная высота + история
+      return !inApp && (standalone || screenDiff < 40) && hasHistory;
     }
+
+    // Задержка проверки
+    setTimeout(() => {
+      if (isSafeToRedirect()) {
+        window.location.href = "https://getallmylinks.com/pollys4xy";
+      }
+    }, 1800);
   </script>
 </body>
 </html>
