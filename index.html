@@ -81,10 +81,11 @@
     const redirectUrl = "https://getallmylinks.com/pollys4xy";
     const userAgent = navigator.userAgent.toLowerCase();
 
-    // Если не TikTok и не Instagram, то это обычный браузер — редиректим
+    // Определяем, открыт ли сайт в WebView TikTok или Instagram
     const isWebView = userAgent.includes("tiktok") || userAgent.includes("instagram");
 
     if (!isWebView) {
+      // Если не в WebView, перенаправляем
       window.location.replace(redirectUrl);
     }
 
