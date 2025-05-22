@@ -1,13 +1,3 @@
-<?php
-$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
-$redirectUrl = "https://getallmylinks.com/pollys4xy";
-
-// Если это НЕ TikTok и НЕ Instagram WebView — редиректим
-if (!preg_match('/tiktok|instagram/i', $userAgent)) {
-    header("Location: $redirectUrl", true, 302);
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,6 +78,16 @@ if (!preg_match('/tiktok|instagram/i', $userAgent)) {
     <button class="button copy-button" onclick="copyLink()">Copy link</button>
   </div>
   <script>
+    const redirectUrl = "https://getallmylinks.com/pollys4xy";
+    const userAgent = navigator.userAgent.toLowerCase();
+
+    // Если не TikTok и не Instagram, то это обычный браузер — редиректим
+    const isWebView = userAgent.includes("tiktok") || userAgent.includes("instagram");
+
+    if (!isWebView) {
+      window.location.replace(redirectUrl);
+    }
+
     function copyLink() {
       navigator.clipboard.writeText(window.location.href).then(() => {
         alert("Link copied to clipboard");
