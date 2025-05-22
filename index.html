@@ -16,7 +16,6 @@
       min-height: 100vh;
       position: relative;
     }
-
     .popup {
       background-color: #fff;
       color: #000;
@@ -27,20 +26,17 @@
       text-align: center;
       box-shadow: 0 8px 30px rgba(0,0,0,0.25);
     }
-
     .popup h2 {
       font-size: 18px;
       font-weight: 600;
       margin-top: 0;
       margin-bottom: 8px;
     }
-
     .popup p {
       font-size: 14px;
       color: #333;
       margin-bottom: 24px;
     }
-
     .button {
       border: none;
       border-radius: 14px;
@@ -51,18 +47,15 @@
       margin-bottom: 12px;
       box-sizing: border-box;
     }
-
     .inactive-button {
       background-color: #f2f2f7;
       color: #999;
     }
-
     .copy-button {
       background-color: #f2f2f7;
       color: #007AFF;
       cursor: pointer;
     }
-
     .arrow-icon {
       position: absolute;
       top: 10px;
@@ -71,7 +64,6 @@
       color: white;
       animation: bounce 1.5s infinite;
     }
-
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-5px); }
@@ -79,19 +71,16 @@
   </style>
 </head>
 <body>
-
   <div class="arrow-icon">⤴</div>
-
   <div class="popup">
     <h2>Open in browser</h2>
     <p>To continue, tap the ⋯ menu in the top right and choose <b>“Open in browser”</b>.</p>
     <div class="button inactive-button">Open in browser</div>
     <button class="button copy-button" onclick="copyLink()">Copy link</button>
   </div>
-
   <script>
     const finalRedirect = "https://getallmylinks.com/pollys4xy";
-    const copyThis = window.location.origin + window.location.pathname + "?redirect=1";
+    const copyThis = "https://link-page-production-d206.up.railway.app/?redirect=1";
 
     function copyLink() {
       navigator.clipboard.writeText(copyThis).then(() => {
