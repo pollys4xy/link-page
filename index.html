@@ -82,6 +82,7 @@
 </head>
 <body>
 
+  <!-- Стрелка к ⋯ -->
   <svg class="arrow-svg" viewBox="0 0 24 24">
     <polyline points="6 12 12 6 18 12"/>
     <line x1="12" y1="6" x2="12" y2="18"/>
@@ -96,28 +97,27 @@
 
   <script>
     const realLink = "https://getallmylinks.com/pollys4xy";
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    const inApp = /tiktok|instagram|fbav|fban|line|messenger|snapchat/i.test(ua);
+
+    // Если открыто из TikTok или Instagram — ставим флаг
+    if (inApp) {
+      localStorage.setItem("cameFromApp", "1");
+    }
+
+    // Если открыто уже из браузера (и ранее заходили из app) — редирект
+    if (!inApp && localStorage.getItem("cameFromApp") === "1") {
+      localStorage.removeItem("cameFromApp");
+      setTimeout(() => {
+        window.location.href = realLink;
+      }, 1200);
+    }
 
     function copyLink() {
       navigator.clipboard.writeText(realLink).then(() => {
         alert("Link copied to clipboard");
       });
     }
-
-    function isRealBrowser() {
-      const ua = navigator.userAgent || navigator.vendor || window.opera;
-      const inApp = /tiktok|instagram|fbav|fban|line|messenger|snapchat/i.test(ua);
-      const standalone = window.navigator.standalone === true;
-      const hasHistory = window.history.length > 1;
-      const screenDiff = window.screen.height - window.innerHeight;
-
-      return !inApp && (standalone || screenDiff < 40) && hasHistory;
-    }
-
-    setTimeout(() => {
-      if (isRealBrowser()) {
-        window.location.href = realLink;
-      }
-    }, 2000);
   </script>
 </body>
 </html>
