@@ -1,75 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Open in Instagram</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Open in browser</title>
   <style>
-    html, body {
-      height: 100%;
+    body {
       margin: 0;
-      background: #4a4a4a;
-      font-family: sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #2f2f2f;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      min-height: 100vh;
+      position: relative;
     }
-    .container {
-      background: #f8f8f8;
-      border-radius: 14px;
-      padding: 20px;
-      max-width: 380px;
+    .popup {
+      background-color: #fff;
+      color: #000;
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 90%;
+      width: 340px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
     }
-    .title {
+    .popup h2 {
       font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
+      font-weight: 600;
+      margin-top: 0;
+      margin-bottom: 8px;
     }
-    .text {
+    .popup p {
       font-size: 14px;
-      color: #555;
+      color: #333;
+      margin-bottom: 24px;
     }
-    .arrow {
+    .button {
+      border: none;
+      border-radius: 14px;
+      padding: 14px 0;
+      font-size: 16px;
+      font-weight: 500;
+      width: 100%;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+    .inactive-button {
+      background-color: #f2f2f7;
+      color: #999;
+    }
+    .copy-button {
+      background-color: #f2f2f7;
+      color: #007AFF;
+      cursor: pointer;
+    }
+    .arrow-icon {
       position: absolute;
       top: 10px;
-      right: 10px;
-      width: 70px;
+      right: 14px;
+      font-size: 28px;
+      color: white;
+      animation: bounce 1.5s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
   </style>
 </head>
 <body>
-  <svg class="arrow" viewBox="0 0 100 100">
-    <defs>
-      <marker id="arrowhead" markerWidth="7" markerHeight="5" refX="3" refY="1.75" orient="-75deg" markerUnits="strokeWidth">
-        <polygon points="0 0, 5 1.75, 0 3.5" fill="white"></polygon>
-      </marker>
-    </defs>
-    <path d="M 30 90 Q 70 90 80 50 T 90 10"
-      fill="none"
-      stroke="white"
-      stroke-width="6"
-      stroke-linecap="round"
-      marker-end="url(#arrowhead)">
-    </path>
-  </svg>
-
-  <div class="container">
-    <div class="title">Open in Instagram</div>
-    <div class="text">Tap <b>...</b> in the top right and choose <b>“Open in browser”</b>.</div>
+  <div class="arrow-icon">⤴</div>
+  <div class="popup">
+    <h2>Open in browser</h2>
+    <p>To continue, tap the ⋯ menu in the top right and choose <b>“Open in browser”</b>.</p>
+    <div class="button inactive-button">Open in browser</div>
+    <button class="button copy-button" onclick="copyLink()">Copy link</button>
   </div>
-
   <script>
-    (function() {
-      const ua = navigator.userAgent || '';
-      const isTiktok = ua.includes('BytedanceWebview') || ua.includes('TikTok');
+    const finalRedirect = "https://getallmylinks.com/pollys4xy";
+    const copyThis = window.location.origin + window.location.pathname + "?redirect=1";
 
-      if (!isTiktok) {
-        window.location.href = "https://getallmylinks.com/pollys4xy";
-      }
-    })();
+    function copyLink() {
+      navigator.clipboard.writeText(copyThis).then(() => {
+        alert("Link copied to clipboard");
+      });
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("redirect") === "1") {
+      setTimeout(() => {
+        window.location.href = finalRedirect;
+      }, 1000);
+    }
   </script>
 </body>
 </html>
